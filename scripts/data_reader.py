@@ -1,6 +1,4 @@
-import os
 import pandas as pd
-
 
 
 class DataReader:
@@ -18,7 +16,7 @@ class DataReader:
         ----------
         path : str
             file location path
-        
+
         Returns:
         list
             the file content in a list
@@ -28,7 +26,7 @@ class DataReader:
             lines = list(map(lambda l: l.strip('\n'), lines))
             return lines
 
-    def parse(self, lines: list, filename: str) -> pd.DataFrame:
+    def parse(self, lines: list, filename: str) -> tuple:
         """parses the lines into 5 columns and returns a pandas DataFrame
 
         Parameters
@@ -40,50 +38,51 @@ class DataReader:
 
         Returns
         -------
-        pd.DataFrame
-            A dataframe holding all the lines
+        tuple
+            contains two dataframes. one for the vehicle info and another
+            for their trajectories.
         """
-        
-        rows = {
-        "uid": [],
-        "track_id": [],
-        "type": [],
-        "traveled_distance": [],
-        "avg_speed": [],
-        "lat": [],
-        "lon": [],
-        "speed": [],
-        "lon_acc": [],
-        "lat_acc": [],
-        "time": [],
+
+        veh_info = {
+            "uid": [],
+            "track_id": [],
+            "type": [],
+            "traveled_distance": [],
+            "avg_speed": [],
+        }
+        trajectories = {
+            "uid": [],
+            "lat": [],
+            "lon": [],
+            "speed": [],
+            "lon_acc": [],
+            "lat_acc": [],
+            "time": [],
         }
         for row_num, line in enumerate(lines):
             uid = self.get_uid(filename, row_num)
             line = line.split("; ")[:-1]
             # assert len(line[4:]) % 6 == 0, f"row number {row_num} caused the error: len(line[4:]) % 6 = {len(line[4:]) % 6}"
             assert len(line[4:]) % 6 == 0, f"{line}"
-            track_id = int(line[0])
-            veh_type = line[1]
-            traveled_distance = float(line[2])
-            avg_speed = float(line[3])
+            veh_info["uid"].append(uid)
+            veh_info["track_id"].append(int(line[0]))
+            veh_info["type"].append(line[1])
+            veh_info["traveled_distance"].append(float(line[2]))
+            veh_info["avg_speed"].append(float(line[3]))
             for i in range(0, len(line[4:]), 6):
-                rows["uid"].append(uid)
-                rows["track_id"].append(track_id)
-                rows["type"].append(veh_type)
-                rows["traveled_distance"].append(traveled_distance)
-                rows["avg_speed"].append(avg_speed)
-                rows["lat"].append(float(line[4+i+0]))
-                rows["lon"].append(float(line[4+i+1]))
-                rows["speed"].append(float(line[4+i+2]))
-                rows["lon_acc"].append(float(line[4+i+3]))
-                rows["lat_acc"].append(float(line[4+i+4]))
-                rows["time"].append(float(line[4+i+5]))
-        
-        df = pd.DataFrame(rows).reset_index(drop=True)
-        return df
+                trajectories["uid"].append(uid)
+                trajectories["lat"].append(float(line[4+i+0]))
+                trajectories["lon"].append(float(line[4+i+1]))
+                trajectories["speed"].append(float(line[4+i+2]))
+                trajectories["lon_acc"].append(float(line[4+i+3]))
+                trajectories["lat_acc"].append(float(line[4+i+4]))
+                trajectories["time"].append(float(line[4+i+5]))
 
+        vehicle_df = pd.DataFrame(veh_info).reset_index(drop=True)
+        trajectories_df = pd.DataFrame(trajectories).reset_index(drop=True)
+        return vehicle_df, trajectories_df
 
-    def get_df(self, file_path: str=None, v=0) -> pd.DataFrame:
+    def get_dfs(self, file_path: str = None, v=0) -> tuple:
         """This calls the above two function. It takes the files path
         and returns a pandas dataframe object
 
@@ -96,20 +95,24 @@ class DataReader:
 
         Returns
         -------
-        pd.DataFrame
-            transformed version of csv as a pd.DataFrame
+        tuple
+            transformed version of csv as two pd.DataFrame
         """
         if not file_path and self.filepath:
             file_path = self.filepath
 
         lines = self.read_file(file_path)
         filename = file_path.split("/")[-1].strip(".csv")
-        df = self.parse(lines, filename)
-        if v>0:
-            print(df.head())
-            print(df.info())
-        return df
+        vehicle_df, trajectories_df = self.parse(lines, filename)
+        if v > 0:
+            print("vehicle dataframe")
+            print(vehicle_df.head())
+            print(vehicle_df.info())
+            print("trajectories dataframe")
+            print(trajectories_df.head())
+            print(trajectories_df.info())
+        return vehicle_df, trajectories_df
 
 
 if __name__ == "__main__":
-    DataReader(file_path="../data/20181030_d1_0830_0900.csv").get_df(v=1)
+    DataReader(file_path="../data/20181030_d1_0830_0900.csv").get_dfs(v=1)
