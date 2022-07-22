@@ -2,7 +2,7 @@ import pandas as pd
 
 
 class DataReader:
-    def __init__(self, file_path) -> None:
+    def __init__(self, file_path=None) -> None:
         self.filepath = file_path
 
     def get_uid(self, filename, row_num):
@@ -44,14 +44,14 @@ class DataReader:
         """
 
         veh_info = {
-            "uid": [],
+            "unique_id": [],
             "track_id": [],
-            "type": [],
+            "veh_type": [],
             "traveled_distance": [],
             "avg_speed": [],
         }
         trajectories = {
-            "uid": [],
+            "unique_id": [],
             "lat": [],
             "lon": [],
             "speed": [],
@@ -64,13 +64,13 @@ class DataReader:
             line = line.split("; ")[:-1]
             # assert len(line[4:]) % 6 == 0, f"row number {row_num} caused the error: len(line[4:]) % 6 = {len(line[4:]) % 6}"
             assert len(line[4:]) % 6 == 0, f"{line}"
-            veh_info["uid"].append(uid)
+            veh_info["unique_id"].append(uid)
             veh_info["track_id"].append(int(line[0]))
-            veh_info["type"].append(line[1])
+            veh_info["veh_type"].append(line[1])
             veh_info["traveled_distance"].append(float(line[2]))
             veh_info["avg_speed"].append(float(line[3]))
             for i in range(0, len(line[4:]), 6):
-                trajectories["uid"].append(uid)
+                trajectories["unique_id"].append(uid)
                 trajectories["lat"].append(float(line[4+i+0]))
                 trajectories["lon"].append(float(line[4+i+1]))
                 trajectories["speed"].append(float(line[4+i+2]))
