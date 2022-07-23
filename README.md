@@ -21,6 +21,8 @@ For each .csv file the following apply:
 
     – Speed is in km/h, Longitudinal and Lateral Acceleration in m/sec2 and time in seconds.
 
+## Installation
+
 ## Acknowledgement
 
 * Data source: pNEUMA – [open-traffic.epfl.ch](https://www.google.com/url?q=http://open-traffic.epfl.ch&sa=D&ust=1598884463327000&usg=AFQjCNF55kUX-00yiJbzlPzZhbgY2R4cfg)
