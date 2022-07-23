@@ -74,3 +74,6 @@ def get_trajectories():
 
         return trajectories_df
 
+
+if __name__=="__main__":
+    print(get_table_names())

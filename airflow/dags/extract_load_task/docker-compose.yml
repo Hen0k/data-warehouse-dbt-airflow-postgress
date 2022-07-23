@@ -1,0 +1,16 @@
+version: '3.4'
+
+
+services:
+  eltaskdag:
+    image: pneuma/eltaskdag:v1.0.0
+    container_name: eltaskdag
+    # ports:
+    #   - "5432:5432"
+    volumes:
+    - ../../data:/scripts/data
+    
+networks:
+  default:
+    external:
+      name: dwh-network

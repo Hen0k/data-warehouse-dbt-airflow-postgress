@@ -14,4 +14,4 @@ def extract_load(file_path=None) -> None:
     
 
 
-extract_load("../data/20181030_d1_0830_0900.csv")
+extract_load("/scripts/data/20181030_d1_0830_0900.csv")
