@@ -15,3 +15,5 @@ For each .csv file the following apply:
 ## Acknowledgement
 
 Data source: pNEUMA – [open-traffic.epfl.ch](https://www.google.com/url?q=http://open-traffic.epfl.ch&sa=D&ust=1598884463327000&usg=AFQjCNF55kUX-00yiJbzlPzZhbgY2R4cfg)
+
+Airflow-with-docker-setup: [Medium blog](https://towardsdatascience.com/setting-up-apache-airflow-with-docker-compose-in-5-minutes-56a1110f4122) by [Marvin Lanhenke](https://medium.com/@marvinlanhenke)
