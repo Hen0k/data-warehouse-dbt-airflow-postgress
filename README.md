@@ -29,10 +29,11 @@ For each .csv file the following apply:
 - [x] Test that the workflow actually populates the containerized database
 - [x] Locally install dbt
 - [x] Connect dbt to the db and run models
-- [x] Generate dbt docs with Airflow
 - [x] Install and connect Redash
 - [x] Create sample visualization
 - [x] Containerized Redash with the rest
+- [ ] Run dbt models as Airflow DAGs
+- [ ] Generate dbt docs with Airflow
 - [ ] Containerized dbt with the rest
 - [ ] Create a dev, staging, and production area for the database.
 
