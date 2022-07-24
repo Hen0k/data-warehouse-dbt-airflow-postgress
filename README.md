@@ -51,6 +51,7 @@ For each .csv file the following apply:
 
 - [Redash easy installation instruction][redash-install-blog]
 - [Redash basics][redash-basics]
+- [Hosting dbt docs][hosting-dbt-docs]
 
 ## Contributors
 
@@ -76,3 +77,4 @@ Made with [contrib.rocks](https://contrib.rocks).
 [linkedin-url]: https://www.linkedin.com/in/henok-tilaye-b18840151/
 [redash-install-blog]: https://www.techrepublic.com/article/how-to-deploy-redash-data-visualization-dashboard-help-docker/
 [redash-basics]: https://hevodata.com/learn/redash/
+[hosting-dbt-docs]: https://amchoi.medium.com/hosting-dbt-documentation-in-gcp-aa529d4f3bb8
