@@ -23,6 +23,20 @@ For each .csv file the following apply:
 
 ## Installation
 
+## Roadmap
+- [x] Creat the data extraction and loading module
+- [x] Containerize the module
+- [x] Run Airflow in a container
+- [x] Modify the compose file to use multiple database users
+- [x] Create an Airflow DAG with a DockerOperator
+- [x] Test that the workflow actually populates the containerized database
+- [x] Locally install dbt
+- [x] Connect dbt to the db and run models
+- [ ] Install and connect Redash
+- [ ] Create sample visualization
+- [ ] Containerized dbt with the rest
+- [ ] Containerized Redash with the rest
+- [ ] Create a dev, staging, and production area for the database.
 ## Acknowledgement
 
 * Data source: pNEUMA – [open-traffic.epfl.ch](https://www.google.com/url?q=http://open-traffic.epfl.ch&sa=D&ust=1598884463327000&usg=AFQjCNF55kUX-00yiJbzlPzZhbgY2R4cfg)
